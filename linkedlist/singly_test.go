@@ -13,15 +13,13 @@ func TestSingly_Front(t *testing.T) {
 
 func TestSingly_Push(t *testing.T) {
 
-	testCase := []int{1, 2, 3, 4, 5}
-
 	l := NewSingly()
-	for _, v := range testCase {
-		l.Push(v)
+	for i := 0; i < 100; i++ {
+		l.Push(i)
 	}
 
 	e := l.Front()
-	for _, testValue := range testCase {
+	for i := 0; i < 100; i++ {
 		if e == nil {
 			t.Fatal("The element must not be empty")
 		}
@@ -29,8 +27,8 @@ func TestSingly_Push(t *testing.T) {
 			t.Fatal("The value of the element must be a int")
 		}
 		eValue := e.Value().(int)
-		if testValue != eValue {
-			t.Fatalf("The value of the element must be a %d, but value is %d", testValue, eValue)
+		if i != eValue {
+			t.Fatalf("The value of the element must be a %d, but value is %d", i, eValue)
 		}
 		e = e.Next()
 	}
@@ -39,18 +37,15 @@ func TestSingly_Push(t *testing.T) {
 
 func TestSingly_Reverse(t *testing.T) {
 
-	testCase := []int{1, 2, 3, 4, 5}
-	testReverseCase := []int{5, 4, 3, 2, 1}
-
 	l := NewSingly()
-	for _, v := range testCase {
-		l.Push(v)
+	for i := 0; i < 100; i++ {
+		l.Push(i)
 	}
 
 	l.Reverse()
 
 	e := l.Front()
-	for _, testValue := range testReverseCase {
+	for i := 99; i >= 0; i-- {
 		if e == nil {
 			t.Fatal("The element must not be empty")
 		}
@@ -58,8 +53,8 @@ func TestSingly_Reverse(t *testing.T) {
 			t.Fatal("The value of the element must be a int")
 		}
 		eValue := e.Value().(int)
-		if testValue != eValue {
-			t.Fatalf("The value of the element must be a %d, but value is %d", testValue, eValue)
+		if i != eValue {
+			t.Fatalf("The value of the element must be a %d, but value is %d", i, eValue)
 		}
 		e = e.Next()
 	}
