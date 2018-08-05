@@ -33,23 +33,72 @@ func (l *Singly) Push(v interface{}) {
 
 }
 
-func (l Singly) Front() *Element {
-	return l.root
+func (l Singly) Front() Element {
+	return *l.root
 }
 
 func (l *Singly) Reverse() {
 
-	current := l.root
+	curr := l.root
 	var prev *Element
 
-	for current != nil {
-		next := current.next
-		current.next = prev
-		prev = current
-		current = next
+	for curr != nil {
+		next := curr.next
+		curr.next = prev
+		prev = curr
+		curr = next
 	}
 
 	l.root = prev
+
+}
+
+func (l *Singly) Rotate(r int) {
+
+	if r == 0 {
+		return
+	}
+
+	curr := l.root
+
+	cnt := 1
+	for cnt < r && curr != nil {
+		curr = curr.next
+		cnt++
+	}
+
+	if curr == nil {
+		return
+	}
+
+	rthElement := curr
+
+	for curr.next != nil {
+		curr = curr.next
+	}
+
+	curr.next = l.root
+	rthElement.next = nil
+
+}
+
+func (l *Singly) Middle() Element {
+
+	fastElement := l.root
+	slowElement := l.root
+
+	if l.root != nil {
+
+		fastElement = fastElement.next
+
+		for fastElement != nil && fastElement.next != nil && fastElement.next.next != nil {
+			fastElement = fastElement.next.next
+			slowElement = slowElement.next
+		}
+
+	}
+
+	return *slowElement
 
 }
 
